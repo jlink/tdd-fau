@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Stolen from Kevlin Henneys talk "Structure and Interpretation of Test  Cases"
+ * Stolen from Kevlin Henney's talk "Structure and Interpretation of Test  Cases"
  * https://vimeo.com/289852238
  */
 
@@ -57,7 +57,33 @@ class Leap_year_spec {
 		}
 	}
 
+	@Nested
+	class A_year_is_supported {
+		@Test
+		void if_it_is_positive() {
+			assertDoesNotThrow(() -> isLeapYear(1));
+			assertDoesNotThrow(() -> isLeapYear(Integer.MAX_VALUE));
+		}
+	}
+
+	@Nested
+	class A_year_is_not_supported {
+		@Test
+		void if_it_is_0() {
+			assertThrows(IllegalArgumentException.class, () -> isLeapYear(0));
+		}
+
+		@Test
+		void if_it_is_negative() {
+			assertThrows(IllegalArgumentException.class, () -> isLeapYear(-1));
+			assertThrows(IllegalArgumentException.class, () -> isLeapYear(Integer.MIN_VALUE));
+		}
+	}
+
 	private static boolean isLeapYear(int year) {
+		if (year <= 0) {
+			throw new IllegalArgumentException("Only positive years are supported");
+		}
 		return year % 4 == 0
 					   && year % 100 != 0
 					   || year % 400 == 0;
