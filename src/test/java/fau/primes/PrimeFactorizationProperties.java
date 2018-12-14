@@ -8,7 +8,7 @@ import net.jqwik.api.constraints.*;
 class PrimeFactorizationProperties {
 
 	@Property
-	boolean all_primes_are_factored_as_themselves(@ForAll("primes") int aPrime) {
+	boolean all_primes_are_factorized_as_themselves(@ForAll("primes") int aPrime) {
 		return Primes.factorsOf(aPrime).equals(Arrays.asList(aPrime));
 	}
 
@@ -18,7 +18,7 @@ class PrimeFactorizationProperties {
 	}
 
 	@Property
-	boolean product_of_primes_is_factored_to_those_primes(@ForAll("listOfPrimes") List<Integer> primes) {
+	boolean product_of_primes_is_factorized_to_same_primes(@ForAll("listOfPrimes") List<Integer> primes) {
 		primes.sort(Integer::compareTo);
 		long product = primes.stream().mapToLong(i -> i).reduce(1, (a, b) -> a * b);
 		Assume.that(product <= Integer.MAX_VALUE);
