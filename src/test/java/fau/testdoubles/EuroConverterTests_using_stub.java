@@ -20,6 +20,13 @@ class EuroConverterTests_using_stub {
 	}
 
 	@Test
+	void euroAmount_withLambdaStub() {
+		RateProvider provider = (from, to) -> 2.0;
+		EuroConverter converter = new EuroConverter(provider);
+		assertEquals(6.0, converter.euroAmount(3.0, "CHF"), 0.001);
+	}
+
+	@Test
 	void unknownCurrencyIsConvertedToZeroEuros() {
 		RateProvider provider = (from, to) -> {
 			throw new IllegalArgumentException();
