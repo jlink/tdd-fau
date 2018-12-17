@@ -6,7 +6,8 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+//Will be available in Jupiter 5.4
+//@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class Stack_spec {
 
 	Stack<Object> stack;
